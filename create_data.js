@@ -103,10 +103,20 @@ function roundToTwo(num) {
     // rent year 5
     //add rounding..............
     tenants[0].rents[4] = new Rent();
-    tenants[0].rents[4].startDate = new Date("04/01/2019");
-    tenants[0].rents[4].endDate = new Date("3/31/20");
+    tenants[0].rents[4].startDate = new Date("04/01/2020");
+    tenants[0].rents[4].endDate = new Date("03/31/2021");
     tenants[0].rents[4].monthlyRent = roundToTwo(tenants[0].rents[3].monthlyRent * 1.025);
+
+
+   // rent year 6
+    //add rounding..............
+    tenants[0].rents[5] = new Rent();
+    tenants[0].rents[5].startDate = new Date("04/01/2021");
+    tenants[0].rents[5].endDate = new Date("03/31/2022");
+    tenants[0].rents[5].monthlyRent = roundToTwo(tenants[0].rents[3].monthlyRent * 1.025);
 }
+
+
 
 
 // Tenant 2 hard coded data
@@ -140,16 +150,24 @@ function roundToTwo(num) {
     //add rounding..............
     tenants[1].rents[3] = new Rent();
     tenants[1].rents[3].startDate = new Date("06/01/2019");
-    tenants[1].rents[3].endDate = new Date("05/31/2019");
+    tenants[1].rents[3].endDate = new Date("05/31/2020");
     tenants[1].rents[3].monthlyRent = roundToTwo(tenants[1].rents[2].monthlyRent * 1.025);
 
 
     // rent year 5
     //add rounding..............
     tenants[1].rents[4] = new Rent();
-    tenants[1].rents[4].startDate = new Date("06/01/2019");
-    tenants[1].rents[4].endDate = new Date("05/31/2019");
+    tenants[1].rents[4].startDate = new Date("06/01/2020");
+    tenants[1].rents[4].endDate = new Date("05/31/2021");
     tenants[1].rents[4].monthlyRent = roundToTwo(tenants[1].rents[3].monthlyRent * 1.025);
+
+
+   // rent year 6
+    //add rounding..............
+    tenants[1].rents[5] = new Rent();
+    tenants[1].rents[5].startDate = new Date("06/01/2021");
+    tenants[1].rents[5].endDate = new Date("05/31/2022");
+    tenants[1].rents[5].monthlyRent = roundToTwo(tenants[1].rents[3].monthlyRent * 1.025);
 }
 
 
