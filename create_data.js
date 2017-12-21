@@ -8,7 +8,8 @@ Create objects.  The  building to the top level object.
 building has tenants who have leases and rent.  The building also has expenses.
 Objects are Buildng, Tenant, Rent and Expenses
 */
-
+const MODEL_YEARS = 5;
+ 
 function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     purchaseDate, improvements, closingCosts, terminalCap, bldgSize) {
     this.bldgName = bldgName;
@@ -35,7 +36,7 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     bldgDiversey.zip = "60639";
     bldgDiversey.country = "USA";
     bldgDiversey.purchasePrice = 4100000;
-    bldgDiversey.purchaseDate = "1/1/2016";
+    bldgDiversey.purchaseDate = "1/1/2017";
     bldgDiversey.improvements = 1200000;
     bldgDiversey.closingCosts = bldgDiversey.purchasePrice * .02;
     bldgDiversey.terminalCap = .065;
@@ -199,18 +200,18 @@ function Expenses(tax, utilities, repairs, landscaping, management, leasing) {
 
 // Store Store objects
 
-// function storeDataLocal() {
-//     console.log("button pressed");
-//     var myObj = JSON.stringify(building);
-//     localStorage.setItem("building", myObj);
-//     console.log("stored data");
-//     alert("Building stored")
-// }
+function storeDataLocal() {
+    console.log("button pressed");
+    var myObj = JSON.stringify(building);
+    localStorage.setItem("building", myObj);
+    console.log("stored data");
+    alert("Building stored")
+}
 
 
-//     // Retrieve Data objects
-//     function getDataLocal() {
-//         text = localStorage.getItem("building");
-//         building = JSON.parse(text);
-//         alert("retrieved Building")
-//     };
+    // Retrieve Data objects
+    function getDataLocal() {
+        text = localStorage.getItem("building");
+        building = JSON.parse(text);
+        alert("retrieved Building")
+    };
