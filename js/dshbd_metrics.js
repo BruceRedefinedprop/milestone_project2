@@ -54,9 +54,21 @@ for (var i = 0; i < MODEL_YEARS; i++) {
 
 
 yearRent = []
-for (var i = 0; i < MODEL_YEARS; i++) {
-    compDate = new Date(modelyears[i].startDate);
-    yearRent[i] = getRent(modelyears[i].startDate, tenants)
+for (var i = 0; i < 12; i++) {
+    // if statement for first month.. then increment compare data...
+    if (i == 0) {
+        compDate = new Date(modelyears[0].startDate);
+    } else {
+        compDate = compDate.add(1).month();
+    }
+    console.log("compDate:" + compDate);
+    
+    yearRent[i] = getRent(compDate, tenants)
 }
+function getSum(total, num) {
+    return total + num;
+}
+
+yearRentTotal = yearRent.reduce(getSum);
 
 

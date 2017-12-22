@@ -137,7 +137,7 @@ function roundToTwo(num) {
     //add roundings........
     tenants[1].rents[1] = new Rent();
     tenants[1].rents[1].startDate = new Date("06/01/2017");
-    tenants[1].rents[1].endDate = new Date("06/31/2018");
+    tenants[1].rents[1].endDate = new Date("05/31/2018");
     tenants[1].rents[1].monthlyRent = roundToTwo(tenants[1].rents[0].monthlyRent * 1.025);
 
     // rent year 3
