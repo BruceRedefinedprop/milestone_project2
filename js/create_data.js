@@ -36,7 +36,7 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     bldgDiversey.zip = "60639";
     bldgDiversey.country = "USA";
     bldgDiversey.purchasePrice = 4100000;
-    bldgDiversey.purchaseDate = "1/1/2017";
+    bldgDiversey.purchaseDate = "03/15/2017";
     bldgDiversey.improvements = 1200000;
     bldgDiversey.closingCosts = bldgDiversey.purchasePrice * .02;
     bldgDiversey.terminalCap = .065;

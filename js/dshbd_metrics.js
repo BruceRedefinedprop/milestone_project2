@@ -11,10 +11,9 @@ function Years(startDate, endDate) {
 
 var modelyears = [];
 
-
 for (var i = 0; i < MODEL_YEARS; i++) {
     if (i == 0) {
-        console.log(MODEL_YEARS);
+         
         modelyears[0] = new Years;
         modelyears[0].startDate = new Date(bldgDiversey.purchaseDate);
         modelyears[0].startDate.setMonth(modelyears[0].startDate.getMonth() + 1, 1);
@@ -31,3 +30,33 @@ for (var i = 0; i < MODEL_YEARS; i++) {
         modelyears[i].endDate.setDate(modelyears[i].endDate.getDate() - 1);
     }
 }
+
+// build Rent Array
+
+//get rent function
+
+ function getRent(compDate, tenant) {
+     var rentTotal = 0;
+    this.compDate = compDate;
+    this.tenant = tenant;
+    for (var i = 0; i < this.tenant.length; i++) {
+        for (var j = 0; j < this.tenant[i].rents.length; j++) {
+            if (this.tenant[i].rents[j].startDate <= this.compDate && this.tenant[i].rents[j].endDate >= this.compDate) {
+                rentTotal +=  this.tenant[i].rents[j].monthlyRent;
+            }
+        }
+        
+    }
+    return rentTotal;
+}
+
+ console.log(getRent(modelyears[0].startDate, tenants));
+
+
+yearRent = []
+for (var i = 0; i < MODEL_YEARS; i++) {
+    compDate = new Date(modelyears[i].startDate);
+    yearRent[i] = getRent(modelyears[i].startDate, tenants)
+}
+
+
