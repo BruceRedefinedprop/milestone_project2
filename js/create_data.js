@@ -45,6 +45,17 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
 // Building Tenants and rent data.  In a final projects
 // tenant object would be part of buildings object.
 
+function Loan(loan, rate, amort) {
+    this.loan = loan;
+    this.rate = rate;
+    this.amort = amort;
+}
+
+var divLoan = new Loan();
+divLoan.loan = .75 * bldgDiversey.purchasePrice;
+divLoan.rate = .04;
+divLoan.amort = 25;
+
 
 function Tenant(name, unit_size, rents) {
     this.name = name;
@@ -114,7 +125,14 @@ function roundToTwo(num) {
     tenants[0].rents[5] = new Rent();
     tenants[0].rents[5].startDate = new Date("04/01/2021");
     tenants[0].rents[5].endDate = new Date("03/31/2022");
-    tenants[0].rents[5].monthlyRent = roundToTwo(tenants[0].rents[3].monthlyRent * 1.025);
+    tenants[0].rents[5].monthlyRent = roundToTwo(tenants[0].rents[4].monthlyRent * 1.025);
+    
+    tenants[0].rents[6] = new Rent();
+    tenants[0].rents[6].startDate = new Date("04/01/2022");
+    tenants[0].rents[6].endDate = new Date("03/31/2023");
+    tenants[0].rents[6].monthlyRent = roundToTwo(tenants[0].rents[5].monthlyRent * 1.025);
+    
+    
 }
 
 
@@ -168,7 +186,12 @@ function roundToTwo(num) {
     tenants[1].rents[5] = new Rent();
     tenants[1].rents[5].startDate = new Date("06/01/2021");
     tenants[1].rents[5].endDate = new Date("05/31/2022");
-    tenants[1].rents[5].monthlyRent = roundToTwo(tenants[1].rents[3].monthlyRent * 1.025);
+    tenants[1].rents[5].monthlyRent = roundToTwo(tenants[1].rents[4].monthlyRent * 1.025);
+    
+    tenants[1].rents[6] = new Rent();
+    tenants[1].rents[6].startDate = new Date("06/01/2022");
+    tenants[1].rents[6].endDate = new Date("05/31/2023");
+    tenants[1].rents[6].monthlyRent = roundToTwo(tenants[1].rents[5].monthlyRent * 1.025);
 }
 
 
