@@ -1,29 +1,45 @@
-/* this will create JSON to stored on the site for retrieval
-by the dashboard application.   It will create an object
-store it on website directory, and retrieve it to used
-by the application. */
 
 /* 
-Create objects.  The  building to the top level object.
-building has tenants who have leases and rent.  The building also has expenses.
-Objects are Buildng, Tenant, Rent and Expenses
+create_data.js loads hard data and create and instantiate obejects :
+
+    Object: Building    ---- > instiated object: bldgDiversey
+    Object: Loan        -----> instiated object: divLoan
+    Object: Tenant      -----> instiated object: tenants
+    Object: Rent        -----> instiated object: rents
+    Object: Expenses    -----> instiated object: expenses
+
+Diversey is an name of fictional building..
+
+There are also a place holder function for loading and store objects
+in local storage.
+
+
+fuctions:
+
+    roundToTwo(num)  takes a number num and rounds decimal place to signifcant digits.
+    storeDataLocal() stores object into local browser specific storage
+    getDataLocal() retrieves ojbect from local browser specific storage
+
 */
-const MODEL_YEARS = 5;
+
+const MODEL_YEARS = 5;   // sets the number of fiscal years in the financial model
+ 
+ // The Building object defines basic information a particular property.
  
 function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     purchaseDate, improvements, closingCosts, terminalCap, bldgSize) {
-    this.bldgName = bldgName;
-    this.stAddress = stAddress;
+    this.bldgName = bldgName;       // simple name
+    this.stAddress = stAddress;     // street address
     this.city = city;
     this.state = state;
     this.zip = zip;
     this.country = country;
-    this.purchasePrice = purchasePrice;
-    this.purchaseDate = purchaseDate;
-    this.improvements = improvements;
-    this.closingCosts = closingCosts;
-    this.terminalCap = terminalCap;
-    this.bldgSize = bldgSize;
+    this.purchasePrice = purchasePrice;  // price paid for the property
+    this.purchaseDate = purchaseDate;   // date of purchase
+    this.improvements = improvements;   // cost of improvements, repairs and other necessary capital investments
+    this.closingCosts = closingCosts;   // property closing costs 
+    this.terminalCap = terminalCap;     // cap rate to calculate potential sale price 
+    this.bldgSize = bldgSize;           // size in SF
 }
 
 // set bldgDiversey data
@@ -75,7 +91,7 @@ function roundToTwo(num) {
     return +(Math.round(num + "e+2") + "e-2");
 }
 
-
+// builds data for two tenants, as per the specification
 // Tenant 1 hard coded data
 {
     var tenants = [];
@@ -131,11 +147,7 @@ function roundToTwo(num) {
     tenants[0].rents[6].startDate = new Date("04/01/2022");
     tenants[0].rents[6].endDate = new Date("03/31/2023");
     tenants[0].rents[6].monthlyRent = roundToTwo(tenants[0].rents[5].monthlyRent * 1.025);
-    
-    
 }
-
-
 
 
 // Tenant 2 hard coded data
@@ -216,12 +228,8 @@ function Expenses(tax, utilities, repairs, landscaping, management, leasing) {
 
 
 
-
-
-
-
-
-// Store Store objects
+// Store Store objects.  These functions need to be updated
+// they were built using a test object and need to modified to support current objects.
 
 function storeDataLocal() {
     console.log("button pressed");

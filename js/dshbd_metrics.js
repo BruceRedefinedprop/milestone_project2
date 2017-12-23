@@ -1,8 +1,38 @@
 /* This module builds are arrays to hold data
 that will be used create Dashboard tables and
-graphs*/
+graphs
 
-// set up models term years
+Objects:
+Object: Years     ---- > instiated object: modelYears   defines fiscal years for the model
+
+functions:
+
+    buildModelYears(duration) return an array of Years objects for each fiscal year.
+    the length of array is set duration, which must be integer.
+
+    getRent(compDate, tenant) comDate is date for specific month.   tenant is Tenant object.
+    the function use compDate, checks the rent tables embeded in the Tenant object
+    sums up the rent from the all tenants and returns total rent for the month.
+
+    buildYearRent(start) takes a start data and builds an array of rents by month for 
+    each year.  It relies on getRent() to retrieve the rent for each month. It returns
+    the array yearRent.
+    
+    there is a code block sums up the yearRent and addes it to modelrent array.
+
+
+Main Arrays:
+
+modelYears define fiscal years.
+modelRent defines rent by fiscal year
+modelExpenses defines expense by fiscal year
+modelNOI defines NOI by fiscal year
+modelCashonCash by fiscal year
+terminalVal potential selling price by year
+
+*/
+
+// defines and create fiscal years.
 
 function Years(startDate, endDate) {
     this.startDate = startDate;
@@ -24,7 +54,6 @@ function buildModelYears(duration) {
             modelyears[0].endDate.setDate(modelyears[0].endDate.getDate() - 1);
         }
         else {
-            console.log(i);
             modelyears[i] = new Years;
             modelyears[i].startDate = new Date(modelyears[i - 1].endDate);
             modelyears[i].startDate.setDate(modelyears[i].startDate.getDate() + 1);
@@ -41,7 +70,11 @@ var modelyears = buildModelYears(MODEL_YEARS);
 
 // build Rent Array
 
-//get rent function
+/*
+    getRent(compDate, tenant) comDate is date for specific month.   tenant is Tenant object.
+    the function use compDate, checks the rent tables embeded in the Tenant object
+    sums up the rent from the all tenants and returns total rent for the month.
+*/
 
 function getRent(compDate, tenant) {
     var rentTotal = 0;
@@ -53,10 +86,15 @@ function getRent(compDate, tenant) {
                 rentTotal += this.tenant[i].rents[j].monthlyRent;
             }
         }
-
     }
     return rentTotal;
 }
+
+/*
+    buildYearRent(start) takes a start data and builds an array of rents by month for 
+    each year.  It relies on getRent() to retrieve the rent for each month. It returns
+    the array YearRent
+*/
 
 function buildYearRent(start) {
     this.start = start;
@@ -79,6 +117,13 @@ function buildYearRent(start) {
 }
 
 
+/*
+creates modelRent array, which defines the rent for each fiscal year.
+The buildYearRent function uses the startdate for each the models fiscal years
+to build a yearRent array. then yearRent array months are summed up, with the result
+with result added to the modelRent array.
+*/
+
 var modelRent = [];
 function getSum(total, num) {
         return total + num;
@@ -87,6 +132,11 @@ for (var i = 0; i < modelyears.length; i++) {
     var yearRent = buildYearRent(modelyears[i].startDate);
     modelRent[i] = yearRent.reduce(getSum);
 }
+
+/* 
+builds a yearExpense array, inceasing expense by 2% per year.
+hardcoded value.
+*/
 
 var modelExpenses = [];
 var yearExpense = 0;
@@ -103,19 +153,34 @@ for (var i = 0; i < modelyears.length; i++) {
     }
 }
 
+
+/*
+builds modelNOI array.  NOI - net operating income.  NOI = rents - expenses.
+*/
+
 var modelNOI = [];
 for (var i = 0; i < modelyears.length; i++) {
     modelNOI[i] = modelRent[i] - modelExpenses[i];
 }
 
+/*  calculates:
+        debt service using pmt() from amort.js
+        building basis whichs its price plus improvements and purchasing expenses.
+        equity in building = basis - loaned amount.
+*/
+
 var debtService = pmt(divLoan.rate, divLoan.amort, divLoan.loan);
 var basis = bldgDiversey.purchasePrice + bldgDiversey.improvements;
 var equity = basis - divLoan.loan;
+
+// builds modelCashonCash array, how return you get for equity.
 
 var modelCashonCash = [];
 for (var i = 0; i < modelyears.length; i++) {
     modelCashonCash[i] = (modelNOI[i] - debtService) / equity ;
 }
+
+// build terminalVal array, potential selling price by year
 
 var terminalVal = [];
 var termCap = bldgDiversey.terminalCap;
