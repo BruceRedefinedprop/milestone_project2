@@ -58,6 +58,33 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     bldgDiversey.terminalCap = .065;
     bldgDiversey.bldgSize = 50000;
 }
+
+// ****
+// MJN example added:
+var bldgDiversey2 =
+  new Building("Workshop 4200", "4200 W Diversey Ave", "Chicago",
+               "Il", "60639", "USA", 4100000, "03/15/2017", 1200000,
+               4100000 * .02, .065, 50000);
+
+// OR
+var bldgDiversey3 =
+  {
+      "bldgName" : "Workshop 4200",
+      "stAddress" : "4200 W Diversey Ave",
+      "city" : "Chicago",
+      "state" : "Il",
+      "zip" : "60639",
+      "country" : "USA",
+      "purchasePrice" : 4100000,
+      "purchaseDate" : "03/15/2017",
+      "improvements" : 1200000,
+      "closingCosts" : bldgDiversey.purchasePrice * .02,
+      "terminalCap" : .065,
+      "bldgSize" : 50000
+  };
+// ****
+
+
 // Building Tenants and rent data.  In a final projects
 // tenant object would be part of buildings object.
 
@@ -91,62 +118,32 @@ function roundToTwo(num) {
     return +(Math.round(num + "e+2") + "e-2");
 }
 
+// ****
+// MJN: using indexes is fine with hardcoded data,
+// but in general with arrays you want to "push" and "pop"
+// values from them.
+function addRent(tenant, rent) {
+  tenant.rents.push(rent);
+}
+// ****
+
 // builds data for two tenants, as per the specification
 // Tenant 1 hard coded data
 {
-    var tenants = [];
-    tenants[0] = new Tenant();
-    tenants[0].name = "Furniture";
-    tenants[0].unit_size = 20000;
-    tenants[0].rents = [];
+  var tenants = [];
 
-    //rent year 1
-    tenants[0].rents[0] = new Rent();
-    tenants[0].rents[0].startDate = new Date("04/01/2016");
-    tenants[0].rents[0].endDate = new Date("03/31/2017");
-    tenants[0].rents[0].monthlyRent = 44166;
+  var baseRent = 44166;
 
-    // rent year 2
-    //add roundings........
-    tenants[0].rents[1] = new Rent();
-    tenants[0].rents[1].startDate = new Date("04/01/2017");
-    tenants[0].rents[1].endDate = new Date("03/31/2018");
-    tenants[0].rents[1].monthlyRent = roundToTwo(tenants[0].rents[0].monthlyRent * 1.025);
+  var tenant1 = new Tenant("Furniture", 20000, []);
 
-    // rent year 3
-    //add rounding..............
-    tenants[0].rents[2] = new Rent();
-    tenants[0].rents[2].startDate = new Date("04/01/2018");
-    tenants[0].rents[2].endDate = new Date("03/31/2019");
-    tenants[0].rents[2].monthlyRent = roundToTwo(tenants[0].rents[1].monthlyRent * 1.025);
+  for (var i = 0; i < 6; i++) {
+    var start = new Date("04/01/" + (2016 + i));
+    var end = new Date("03/31/" + (2017 + i));
+    var amount = roundToTwo(baseRent * Math.pow(1.025, i));
+    addRent(tenant1, new Rent(start, end, amount));
+  }
 
-    // rent year 4
-    //add rounding..............
-    tenants[0].rents[3] = new Rent();
-    tenants[0].rents[3].startDate = new Date("04/01/2019");
-    tenants[0].rents[3].endDate = new Date("03/31/2020");
-    tenants[0].rents[3].monthlyRent = roundToTwo(tenants[0].rents[2].monthlyRent * 1.025);
-
-
-    // rent year 5
-    //add rounding..............
-    tenants[0].rents[4] = new Rent();
-    tenants[0].rents[4].startDate = new Date("04/01/2020");
-    tenants[0].rents[4].endDate = new Date("03/31/2021");
-    tenants[0].rents[4].monthlyRent = roundToTwo(tenants[0].rents[3].monthlyRent * 1.025);
-
-
-   // rent year 6
-    //add rounding..............
-    tenants[0].rents[5] = new Rent();
-    tenants[0].rents[5].startDate = new Date("04/01/2021");
-    tenants[0].rents[5].endDate = new Date("03/31/2022");
-    tenants[0].rents[5].monthlyRent = roundToTwo(tenants[0].rents[4].monthlyRent * 1.025);
-    
-    tenants[0].rents[6] = new Rent();
-    tenants[0].rents[6].startDate = new Date("04/01/2022");
-    tenants[0].rents[6].endDate = new Date("03/31/2023");
-    tenants[0].rents[6].monthlyRent = roundToTwo(tenants[0].rents[5].monthlyRent * 1.025);
+  tenants.push(tenant1);
 }
 
 
