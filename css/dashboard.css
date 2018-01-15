@@ -21,3 +21,64 @@
       float: none;
       display: inline-block;
     }
+
+
+/*Tab Styles*/
+    
+    
+#tenant {
+    display: none;
+}    
+
+
+#expenses {
+    display: none;
+} 
+
+#loan {
+    display: none;
+} 
+
+
+
+
+
+.table-editable {
+    position: relative;
+}
+
+.table-editable .glyphicon {
+        font-size: 20px;
+    }
+    
+.table-remove {
+    color: #700000;
+    cursor: pointer;
+}  
+
+/*.table-remove &:hover {*/
+/*    color: #f00000;*/
+/*}*/
+
+
+.table-up, .table-down {
+    color: #007000;
+    cursor: pointer;
+}
+
+/*.table-up, .table-down &:hover {*/
+/*    color:#00f000;*/
+/*}*/
+
+.table-add {
+    color: #070000;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 0;
+}
+
+/*.table-add &:hover {*/
+/*    color: #0b0000;*/
+/*}*/
+

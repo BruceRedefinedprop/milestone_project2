@@ -48,7 +48,7 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     bldgDiversey.bldgName = "Workshop 4200";
     bldgDiversey.stAddress = "4200 W Diversey Ave";
     bldgDiversey.city = "Chicago";
-    bldgDiversey.state = "Il";
+    bldgDiversey.state = "IL";
     bldgDiversey.zip = "60639";
     bldgDiversey.country = "USA";
     bldgDiversey.purchasePrice = 4100000;
