@@ -1,57 +1,77 @@
-var $TABLE = $('#tenant-table');
-var $BTN = $('#export-btn');
-var $EXPORT = $('#export');
+var arrayToTable = function(data, options) {
 
-$('.table-add').click(function() {
-    var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide');
-    $TABLE.find('table').append($clone);
-})
+    "use strict";
 
+    var table = $('<table />'),
+        thead,
+        tfoot,
+        rows = [],
+        row,
+        i,
+        j,
+        defaults = {
+            th: true, // should we use th elemenst for the first row
+            thead: false, //should we incldue a thead element with the first row
+            tfoot: false, // should we include a tfoot element with the last row
+            attrs: {} // attributes for the table element, can be used to
+        };
 
-$('.table-remove').click(function() {
-    $(this).parents('tr').detach();
-})
+    options = $.extend(defaults, options);
 
-$('.table-up').click(function() {
-    var $row = $(this).parents('tr');
-    if ($row.index() === 1) return; // index 0 is the header
-    $row.prev().before($row.get(0));
-})
+    table.attr(options.attrs);
 
+    // loop through all the rows, we will deal with tfoot and thead later
+    for (var i = 0; i < data.length; i = i + 1) {
+        row = $('<tr />');
+        for (var j = 0; j < data[i].length; j = j + 1) {
+            if (i === 0 && options.th) {
+                row.append($('<th />').html(data[i][j]));
+            }
+            else {
+                row.append($('<td />').html(data[i][j]));
+            }
+        }
+        rows.push(row);
+    };
 
-$('.table-down').click(function() {
-    var $row = $(this).parents('tr');
-    $row.next().after($row.get(0));
-})
+    // if we want a thead use shift to get it
+    if (options.thead) {
+        thead = rows.shift();
+        thead = $('<thead />').append(thead);
+        table.append(thead);
+    };
 
-// create jquery prototypes for array functions
+    // if we want a tfoot then pop it off for later use
+    if (options.tfoot) {
+        tfoot = rows.pop();
+    };
 
-jQuery.fn.pop = [].pop;
-jQuery.fn.shift = [].shift;
+    // add all the rows
+    for (i = 0; i < rows.length; i = i + 1) {
+        table.append(rows[i]);
+    };
 
-$BTN.click(function() {
-            var $rows = $TABLE.find('tr.not(:hidden)');
-            var headers = [];
-            var data = [];
+    // and finally add the footer if needed
+    if (options.tfoot) {
+        tfoot = $('<tfoot />').append(tfoot);
+        table.append(tfoot);
+    };
 
-            // get headers
-            $($rows.shift()).find('th:not(:empty)').each(function() {
-                headers.push($(this).text().toLowerCase());
-            });
+    return table;
+};
 
-            //turn all existing rows into a loopable array
-            $rows.each(function() {
-                var $td = $(this).find('td');
-                var h = {};
-
-
-                headers.forEach(function(header, i) {
-                    h[header] = $td.eq(i).text();
-                });
-            });
-            
-        data.push(h);
+function buildSelect () {
+    var opt = $('#tenantListdpdwn') ;
+    var selObj = tenant;
+    var rows = [];
+    for (var i = 0; i < tenant.length; i++ ) {
+        opt.append($('<option>', {
+            value: i,
+            text: tenant[i].name
+        }));
         
-        //output the result
-        $EXPORT.text(JSON.stringify(data));
-})
+    }
+}
+
+
+

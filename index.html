@@ -10,6 +10,7 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="js/date.js"></script>
     <script type="text/javascript" src="js/amort.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="js/create_data.js"></script>
     <script src="js/dshbd_metrics.js"></script>
 
@@ -52,10 +53,10 @@
         <div class="container content-container">
             <ul id="nav-submenu" class="nav nav-pills">
                 <li class=" nav-building"><a href="#">Building</a></li>
-                <li class = "nav-tenants"><a href="#">Tenants</a></li>
-                <li class = "nav-expenses"><a href="#">Expenses</a></li>
-                <li class = "nav-loan"><a href="#">Financing</a></li>
-                <li class = "nav-dashboard"><a href="#">Dashboard</a></li>
+                <li class="nav-tenants"><a href="#">Tenants</a></li>
+                <li class="nav-expenses"><a href="#">Expenses</a></li>
+                <li class="nav-loan"><a href="#">Financing</a></li>
+                <li class="nav-dashboard"><a href="#">Dashboard</a></li>
             </ul>
         </div>
     </div>
@@ -187,67 +188,23 @@
         <form class="form-horizontal">
             <div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="tenantName">Name:</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" id="tenantName" placeholder="Enter Tenant's Name">
-                    </div>
-                    <label class="control-label col-sm-2" for="tenantSize">Unit Size:</label>
+                    <label class="control-label col-sm-2" for="tenantSize">Unit Size (SF):</label>
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="tenantSize" placeholder="Enter Tenant Unit Size SF">
                     </div>
+                    <label class="control-label col-sm-1" for="tenantList">Tenants</label>
+                    <div class="col-sm-2">
+                        <select class="form-control" id="tenantListdpdwn">
+                        <!--<option value=0>Tenant 1</option>-->
+                        <!--<option value=1>Tenant 2</option>-->
+                    </select>
+                    </div>
                 </div>
             </div>
-            <div id="tenant-table" class="table-editable">
-                <span class="table-add glyphicon glyphicon-plus"></span>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Monthly Rent</th>
-                            <th>Annualized Rent</th>
-                            <th>Rent / SF</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <!--Build table dynamically using Jquery-->
-                    <tbody>
-                        <tr>
-                            <td contenteditable="true">Enter Date</td>
-                            <td contenteditable="true">Enter Date</td>
-                            <td contenteditable="true">Enter Rent</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <span class="table-remove glyphicon glyphicon-remove"></span>
-                            </td>
-                            <td>
-                                <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                                <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                            </td>
-                        </tr>
-                        <!--This a clonable row-->
-                        <tr class="hide">
-                            <td contenteditable="true">Enter Date</td>
-                            <td contenteditable="true">Enter Date</td>
-                            <td contenteditable="true">Enter Rent</td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <span class="table-remove glyphicon glyphicon-remove"></span>
-                            </td>
-                            <td>
-                                <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                                <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <button id="export-btn" class="btn btn-primar">Export Date</button>
-            <p id="export"></p>
-        </form>
+            <div id="tenant-table"> </div>
+    </div>
+
+    </form>
     </div>
 
     <!--Expense Info Form-->
@@ -262,19 +219,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Expense</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <!--Build table dynamically using Jquery-->
-                    <tbody>
+            <div id="exp-table">
 
-                    </tbody>
-                </table>
             </div>
         </form>
     </div>
