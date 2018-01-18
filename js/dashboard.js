@@ -3,6 +3,8 @@ $('#nav-submenu li.nav-building').click(function() {
     $('#tenant').css('display', 'none');
     $('#expenses').css('display', 'none');
     $('#loan').css('display', 'none');
+    $('#dashboard').css('display', 'none');
+    
 })
 
 $('#nav-submenu li.nav-tenants').click(function() {
@@ -10,6 +12,7 @@ $('#nav-submenu li.nav-tenants').click(function() {
     $('#tenant').css('display', 'block');
     $('#expenses').css('display', 'none');
     $('#loan').css('display', 'none');
+    $('#dashboard').css('display', 'none');
 })
 
 $('#nav-submenu li.nav-expenses').click(function() {
@@ -17,6 +20,7 @@ $('#nav-submenu li.nav-expenses').click(function() {
     $('#tenant').css('display', 'none');
     $('#expenses').css('display', 'block');
     $('#loan').css('display', 'none');
+    $('#dashboard').css('display', 'none');
 })
 
 $('#nav-submenu li.nav-loan').click(function() {
@@ -24,6 +28,7 @@ $('#nav-submenu li.nav-loan').click(function() {
     $('#tenant').css('display', 'none');
     $('#expenses').css('display', 'none');
     $('#loan').css('display', 'block');
+    $('#dashboard').css('display', 'none');
 })
 
 $('#nav-submenu li.nav-dashboard').click(function() {
@@ -31,6 +36,7 @@ $('#nav-submenu li.nav-dashboard').click(function() {
     $('#tenant').css('display', 'none');
     $('#expenses').css('display', 'none');
     $('#loan').css('display', 'none');
+    $('#dashboard').css('display', 'block');
 })
 
 // buildTenantRentTbl(0);
@@ -53,10 +59,21 @@ function setBuildingHtml(building) {
     $('#bldgClosing').val(building.closingCosts);
     $('#bldgPrice').val(building.purchasePrice);
     $('#bldgImprovements').val(building.improvements);
-    $('#bldgTermCap').val(building.terminalCap);
+    $('#bldgTermCap').val(building.terminalCap * 100);
     var dateSetter = dt_formater(building.purchaseDate)
     $('#bldgPurDate').val(dateSetter);
 }
+
+function setLoanHtml(loan) {
+    $('#loanBank').val(loan.bank);
+    $('#loanAmount').val(loan.loan);
+    $('#loanTerm').val(loan.term);
+    $('#loanRate').val(loan.rate);
+    $('#loanAmort').val(loan.amort);
+    var dateSetter = dt_formater(loan.startDate)
+    $('#loanStart').val(dateSetter);
+}
+
 
 
 function dt_formater(dateText) {
@@ -83,7 +100,9 @@ function rentArrayBuilder(bldgArray, header) {
 }
 
 setBuildingHtml(bldgDiversey);
-buildSelect();
+buildSelect('#tenantListdpdwn',tenant);
+
+setLoanHtml(divLoan);
 
 function buildTenantRentTbl(i) {
     // $('#bldgName').val(building.bldgName);
@@ -105,16 +124,11 @@ function buildTenantRentTbl(i) {
 
 buildTenantRentTbl(0);
 
-// var tenantData = [];
-// var tenantHeader = ["start Date", "End Date", "Monthly Rent", "Annualized Rent", "Rent / SF"];
-// var tenantData = rentArrayBuilder(tenant[1], tenantHeader);
-// console.log(tenantData);
-// var Renttable = arrayToTable(tenantData, {
-//     thead: true,
-//     attrs: { class: 'table' }
-// })
-// $('#tenant-table').append(Renttable);
+function buildExpTab(exp) {
+    $('#expGrw').val(exp)
+}
 
+buildExpTab((.02 * 100));
 
 
 function expArrayBuilder(exp, header) {
@@ -122,9 +136,11 @@ function expArrayBuilder(exp, header) {
     expData.push(header);
     for (var property in exp) {
         var arrayRow = [];
-        arrayRow[0] = property;
-        arrayRow[1] = numeral(exp[property]).format('$0,0.00');
-        expData.push(arrayRow);
+        if (property != "growth") {
+           arrayRow[0] = property;
+           arrayRow[1] = numeral(exp[property]).format('$0,0.00');
+           expData.push(arrayRow); 
+        }
     }
     return expData;
 };
@@ -138,3 +154,7 @@ var ExpTable = arrayToTable(expData, {
 })
 
 $('#exp-table').append(ExpTable);
+
+function loadXMLDoc() { var e;
+    e = window.XMLHttpRequest ? new XMLHttpRequest : new ActiveXObject("Microsoft.XMLHTTP"), e.onreadystatechange = function() { 4 == e.readyState && 200 == e.status && (document.getElementById("KeyMarketRates").innerHTML = e.responseText) }, e.open("POST", "https://www.commercialloandirect.com/rates-api.php", !0), e.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), e.send("Prime=N&Libor30Day=N&Libor90Day=N&Libor6Month=N&Libor1Year=N&Swap3Year=N&Swap5Year=N&Swap7Year=N&Swap10Year=N&Treasury5Year=Y&Treasury7Year=Y&Treasury10Year=Y&SBA10Year=N&SBA20Year=N&Bordered=N&Center=N&RightCol=N&LeftCol=N&ColorText=000000&Width=50%&WidthCol1=050&WidthCol2=050&TbColor=FFFFFF&BdColor=000000") }
+loadXMLDoc();

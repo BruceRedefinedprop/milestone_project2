@@ -8,11 +8,13 @@
     <title>Harry's Tools | Real Etate Analysis</title>
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="js/date.js"></script>
     <script type="text/javascript" src="js/amort.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="js/create_data.js"></script>
     <script src="js/dshbd_metrics.js"></script>
+
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -213,8 +215,8 @@
         <form class="form-horizontal">
             <div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="expGrw">Expense Growth Rate:</label>
-                    <div class="col-sm-3">
+                    <label class="control-label col-sm-2" for="expGrw">Expense Growth Rate %:</label>
+                    <div class="col-sm-1">
                         <input type="number" class="form-control" id="expGrw" placeholder="Enter Expense Growth Rate %">
                     </div>
                 </div>
@@ -245,17 +247,17 @@
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="loanAmount" placeholder="Enter Loan Amount $">
                     </div>
-                    <label class="control-label col-sm-2" for="loanTerm">Term:</label>
+                    <label class="control-label col-sm-2" for="loanTerm">Term (years):</label>
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="loanTerm" placeholder="Enter Loan Term years">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="loanRate">Interest Rate:</label>
+                    <label class="control-label col-sm-2" for="loanRate">Interest Rate %:</label>
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="loanRate" placeholder="Enter Interest Rate %">
                     </div>
-                    <label class="control-label col-sm-2" for="loanAmort">Amortization Periods:</label>
+                    <label class="control-label col-sm-2" for="loanAmort">Amortization Periods (years):</label>
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="loanAmort" placeholder="Enter Amortization Period Years">
                     </div>
@@ -266,8 +268,15 @@
                     </div>
                 </div>
             </div>
-
         </form>
+        <div id="KeyMarketRates"></div>
+        <br>
+    </div>
+
+    <!--Dashboard-->
+
+    <div id='dashboard'>
+        <div lass="container" id="rentChart"></div>
     </div>
 
 
@@ -285,6 +294,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js " integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa " crossorigin="anonymous "></script>
     <script src="js/editableTable.js"></script>
     <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" src="js/dshbd_charts.js"></script>
 </body>
 
 </html>

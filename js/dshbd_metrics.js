@@ -125,9 +125,10 @@ with result added to the modelRent array.
 */
 
 var modelRent = [];
+
 function getSum(total, num) {
-        return total + num;
-    }
+    return total + num;
+}
 for (var i = 0; i < modelyears.length; i++) {
     var yearRent = buildYearRent(modelyears[i].startDate);
     modelRent[i] = yearRent.reduce(getSum);
@@ -148,8 +149,9 @@ for (x in expenses) {
 for (var i = 0; i < modelyears.length; i++) {
     if (i == 0) {
         modelExpenses[i] = yearExpense;
-    } else {
-        modelExpenses[i] = modelExpenses[i-1] * 1.02;
+    }
+    else {
+        modelExpenses[i] = modelExpenses[i - 1] * 1.02;
     }
 }
 
@@ -177,7 +179,7 @@ var equity = basis - divLoan.loan;
 
 var modelCashonCash = [];
 for (var i = 0; i < modelyears.length; i++) {
-    modelCashonCash[i] = (modelNOI[i] - debtService) / equity ;
+    modelCashonCash[i] = (modelNOI[i] - debtService) / equity;
 }
 
 // build terminalVal array, potential selling price by year
@@ -187,8 +189,12 @@ var termCap = bldgDiversey.terminalCap;
 for (var i = 0; i < modelyears.length; i++) {
     if (i == 0) {
         terminalVal[i] = basis;
-    } else {
-        terminalVal[i] = modelNOI[i] / termCap ;
     }
-    
+    else {
+        terminalVal[i] = modelNOI[i] / termCap;
+    }
+
 }
+
+
+

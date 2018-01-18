@@ -60,9 +60,9 @@ var arrayToTable = function(data, options) {
     return table;
 };
 
-function buildSelect () {
-    var opt = $('#tenantListdpdwn') ;
-    var selObj = tenant;
+function buildSelect (tag, obj) {
+    var opt = $(tag);
+    var selObj = obj;
     var rows = [];
     for (var i = 0; i < tenant.length; i++ ) {
         opt.append($('<option>', {

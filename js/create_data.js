@@ -61,16 +61,24 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
 // Building Tenants and rent data.  In a final projects
 // tenant object would be part of buildings object.
 
-function Loan(loan, rate, amort) {
+function Loan(loan, rate, amort, bank, term, startDate) {
     this.loan = loan;
     this.rate = rate;
     this.amort = amort;
+    this.bank = bank;
+    this.term = term;
+    this.startDate = startDate;
 }
 
 var divLoan = new Loan();
 divLoan.loan = .75 * bldgDiversey.purchasePrice;
-divLoan.rate = .04;
+divLoan.rate = .04 * 100;
 divLoan.amort = 25;
+divLoan.bank = "Wintrust";
+divLoan.term = "10";
+divLoan.startDate = bldgDiversey.purchaseDate;
+
+
 
 
 function Tenant(name, unit_size, rents) {
@@ -209,14 +217,17 @@ function roundToTwo(num) {
 
 // Create Expenses and hardcoded data.
 
-function Expenses(tax, utilities, repairs, landscaping, management, leasing) {
+function Expenses(tax, utilities, repairs, landscaping, management, leasing, growth) {
     this.tax = tax;
     this.utilities = utilities;
     this.repairs = repairs;
     this.landscaping = landscaping;
     this.management = management;
     this.leasing = leasing;
-} {
+    this.growth = growth;
+} 
+
+{
     var expenses = new Expenses();
     expenses.tax = 100000;
     expenses.utilities = 12500;
@@ -224,6 +235,8 @@ function Expenses(tax, utilities, repairs, landscaping, management, leasing) {
     expenses.landscaping = 5000;
     expenses.management = 7500;
     expenses.leasing = 7500;
+    expenses.growth = .02;
+    
 }
 
 
