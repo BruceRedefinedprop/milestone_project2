@@ -22,7 +22,10 @@ fuctions:
 
 */
 
-const MODEL_YEARS = 5;   // sets the number of fiscal years in the financial model
+var MODEL_YEARS = 5;   // sets the number of fiscal years in the financial model
+var current_building;
+var current_loan;
+var current_tenant;
  
  // The Building object defines basic information a particular property.
  
@@ -45,6 +48,7 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
 // set bldgDiversey data
 {
     var bldgDiversey = new Building();
+    
     bldgDiversey.bldgName = "Workshop 4200";
     bldgDiversey.stAddress = "4200 W Diversey Ave";
     bldgDiversey.city = "Chicago";
@@ -57,6 +61,8 @@ function Building(bldgName, stAddress, city, state, zip, country, purchasePrice,
     bldgDiversey.closingCosts = bldgDiversey.purchasePrice * .02;
     bldgDiversey.terminalCap = .065;
     bldgDiversey.bldgSize = 50000;
+    current_building = Object.assign({}, bldgDiversey);
+    // current_building = bldgDiversey;
 }
 // Building Tenants and rent data.  In a final projects
 // tenant object would be part of buildings object.
@@ -71,12 +77,13 @@ function Loan(loan, rate, amort, bank, term, startDate) {
 }
 
 var divLoan = new Loan();
-divLoan.loan = .75 * bldgDiversey.purchasePrice;
-divLoan.rate = .04 * 100;
-divLoan.amort = 25;
-divLoan.bank = "Wintrust";
-divLoan.term = "10";
-divLoan.startDate = bldgDiversey.purchaseDate;
+current_loan = divLoan;
+current_loan.loan = .75 * bldgDiversey.purchasePrice;
+current_loan.rate = .04;
+current_loan.amort = 25;
+current_loan.bank = "Wintrust";
+current_loan.term = "10";
+current_loan.startDate = bldgDiversey.purchaseDate;
 
 
 
@@ -113,6 +120,8 @@ function roundToTwo(num) {
     tenants[0].rents[0].startDate = new Date("04/01/2016");
     tenants[0].rents[0].endDate = new Date("03/31/2017");
     tenants[0].rents[0].monthlyRent = 44166;
+    
+    
 
     // rent year 2
     //add roundings........
@@ -213,6 +222,10 @@ function roundToTwo(num) {
     tenants[1].rents[6].endDate = new Date("05/31/2023");
     tenants[1].rents[6].monthlyRent = roundToTwo(tenants[1].rents[5].monthlyRent * 1.025);
 }
+
+
+// Save copy of tenants for reset to baseline
+var baseline_tenants = Object.assign({}, tenants);
 
 
 // Create Expenses and hardcoded data.

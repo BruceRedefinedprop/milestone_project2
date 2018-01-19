@@ -1,3 +1,6 @@
+
+
+
 var arrayToTable = function(data, options) {
 
     "use strict";
@@ -64,12 +67,12 @@ function buildSelect (tag, obj) {
     var opt = $(tag);
     var selObj = obj;
     var rows = [];
-    for (var i = 0; i < tenant.length; i++ ) {
+    // opt.$(tag).remove();
+    for (var i = 0; i < selObj.length; i++ ) {
         opt.append($('<option>', {
             value: i,
-            text: tenant[i].name
+            text: selObj[i].name
         }));
-        
     }
 }
 
